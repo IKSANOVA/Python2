@@ -1,28 +1,25 @@
-import time
+import email
 
 import pytest
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from functions import wait_until_clickable, wait_until_not_present, PARAMETER_FOR_TEST, wait_until_present
+
+from constants import NEGATIVE_LOGIN_CREDENTIALS, POSITIVE_LOGIN_CREDENTIALS, page_login
+from functions import wait_until_clickable, wait_until_present, login_ui
 
 
 @pytest.mark.auth
 class TestAuthorizationClass:
 
     @pytest.mark.smoke
-    def test_login_positive(self):
-        with Chrome() as browser:
-            browser.maximize_window()
-            browser.get('https://qastand.valhalla.pw/login')
-            wait_until_clickable(browser, (By.NAME, 'email')).send_keys("qa_test@test.ru")
-            wait_until_clickable(browser, (By.NAME, 'password')).send_keys("!QAZ2wsx")
-            wait_until_clickable(browser, (By.CSS_SELECTOR, '[type=checkbox]')).click()
-            wait_until_clickable(browser, (By.CLASS_NAME, 'button')).click()
-            url = browser.current_url
-            browser.get_cookie("session")
-            assert url == "https://qastand.valhalla.pw/profile"
+    def test_login_positive(self, browser):
+        browser.get(page_login)
+        login_ui(browser, POSITIVE_LOGIN_CREDENTIALS["email"], POSITIVE_LOGIN_CREDENTIALS["password"])
+        url = browser.current_url
+        browser.get_cookie("session")
+        assert url == "https://qastand.valhalla.pw/profile"
 
-    @pytest.mark.parametrize("email,password", PARAMETER_FOR_TEST, ids=["test1", "test2", "test3", "test4"])
+    @pytest.mark.parametrize("email,password", NEGATIVE_LOGIN_CREDENTIALS, ids=["test1", "test2", "test3", "test4"])
     def test_login_negatives(self, email, password):
         with Chrome() as browser:
             browser.maximize_window()
