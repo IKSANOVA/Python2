@@ -4,8 +4,8 @@ import pytest
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 
-from constants import NEGATIVE_LOGIN_CREDENTIALS, POSITIVE_LOGIN_CREDENTIALS, page_login
-from functions import wait_until_clickable, wait_until_present, login_ui
+from constants import POSITIVE_LOGIN_CREDENTIALS, page_login
+from functions import login_ui
 
 
 @pytest.mark.auth
