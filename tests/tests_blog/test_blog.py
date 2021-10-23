@@ -1,5 +1,4 @@
 import pytest
-from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 
 from constants import NEGATIVE_LOGIN_CREDENTIALS, POSITIVE_LOGIN_CREDENTIALS, page_login, page_blog

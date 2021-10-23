@@ -7,7 +7,7 @@ from selenium.webdriver.remote.webdriver import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
-from constants import SESSION_COOKIE
+from constants import SESSION_COOKIE, page_login
 
 
 def wait_for_url_to_be(driver: Chrome, url: str, timeout: int = 5) -> bool:
@@ -57,5 +57,5 @@ def login_ui(browser: Chrome, email: str, password: str) -> None:
 
 
 def login_cookie(browser: Chrome) -> None:
-    """Функция логина на стенде через UI"""
+    """Функция логина на стенде через COOKIE"""
     browser.add_cookie(SESSION_COOKIE)
