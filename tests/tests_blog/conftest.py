@@ -1,17 +1,10 @@
 import pytest
-from selenium.webdriver import Chrome
 
-from constants import page_login
-from functions import login_cookie
+from api.api_client import Client
 
 
 @pytest.fixture(autouse=True)
-def browser():
-    browser = Chrome()
-    browser.maximize_window()
-    browser.get(page_login)
-    login_cookie(browser)
-    yield browser
-    browser.quit()
-
-
+def login(browser, url):
+    cookie = Client(url).auth()
+    browser.get(url)
+    browser.add_cookie({"name": "session", "value": cookie["session"]})

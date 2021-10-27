@@ -1,10 +1,45 @@
+import random
+
 import pytest
-from selenium.webdriver import Chrome
+from constants import Links, VALID_BROWSER
 
 
 @pytest.fixture()
-def browser():
-    browser = Chrome()
-    browser.maximize_window()
+def browser(request):
+    launch = request.config.getoption("--launch")
+    browser = VALID_BROWSER[launch]()
     yield browser
     browser.quit()
+
+
+@pytest.fixture(scope="session")
+def url(request):
+    """Фикстура для получения заданного из командной строки окружения"""
+    env = request.config.getoption("--env")
+    url = Links.url.get(env)
+    if not url:
+        raise Exception("Передано неверное окружение")
+    return url
+
+
+def pytest_configure(config):
+    config.addinivalue_line(
+        "markers", "auth: tests for auth testing"
+    )
+    config.addinivalue_line(
+        "markers", "smoke: tests for smoke testing"
+    )
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--env", default="prod"
+    )
+    parser.addoption(
+        "--launch", default="Chrome", choices=["chrome", "opera"]
+    )
+
+
+@pytest.fixture(scope='session', autouse=True)
+def faker_seed():
+    return random.randint(0, 9999)

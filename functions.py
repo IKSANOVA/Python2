@@ -7,8 +7,6 @@ from selenium.webdriver.remote.webdriver import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
-from constants import SESSION_COOKIE, page_login
-
 
 def wait_for_url_to_be(driver: Chrome, url: str, timeout: int = 5) -> bool:
     """Ждём, пока URL страницы не начнёт соответствовать ожидаемому"""
