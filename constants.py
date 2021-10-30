@@ -8,8 +8,8 @@ NEGATIVE_LOGIN_CREDENTIALS = [
 ]
 
 # здесь должны быть креденшелзы, присланные преподавателем
-POSITIVE_LOGIN_CREDENTIALS = {"email": "qa_test@test.ru",
-                              "password": "!QAZ2wsx"}
+POSITIVE_LOGIN_CREDENTIALS = {"email": "api_user_9@test.ru",
+                              "password": "q9w9e9"}
 
 
 class Links:

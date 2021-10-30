@@ -1,3 +1,5 @@
+from datetime import time
+
 import pytest
 
 from api.api_helpers import delete_all_posts
@@ -11,7 +13,7 @@ from pages.blog_pages.post_page import PostPage
 @pytest.fixture()
 def delete_user_posts(url):
     yield
-    delete_all_posts(url)
+    #delete_all_posts(url)
 
 
 @pytest.fixture()
@@ -59,4 +61,24 @@ class TestsBlogModify:
         self.blog_page.check_post_created_successfully_message()
         self.blog_page.check_post_exists(title)
 
-    # далее должны быть ваши тесты удаления и редактирования поста
+    # тест редактирования поста
+    def test_edit_post(self, browser, url, faker):
+        title = faker.text(10)
+
+        self.blog_page.open_page()
+        self.post_modify_page.click_title_button()
+        self.post_modify_page.click_edit_button()
+        self.post_modify_page.add_title(title)
+        self.post_modify_page.add_text(faker.text(100))
+        self.post_modify_page.add_tags(faker.text(5))
+        self.post_modify_page.click_submit_button()
+
+        self.blog_page.check_post_created_successfully_message()
+
+    # тест удаления поста
+    def test_delete_post(self, browser, url):
+
+        self.blog_page.open_page()
+        self.post_modify_page.click_title_button()
+        self.post_modify_page.click_delete_button()
+
