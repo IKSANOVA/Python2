@@ -34,7 +34,7 @@ class TestAuthorization:
     def test_logout(self):
         self.base_page.open_page()
         self.base_page.click_button_exit()
-        self.base_page.open_page()
+        self.main_page.open_page()
         self.main_page.check_button_new()
 
 

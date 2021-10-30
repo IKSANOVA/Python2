@@ -12,6 +12,7 @@ class PostModifyPage(BasePage):
     EDIT_BUTTON = (By.ID, "edit")
     TITLE = (By.TAG_NAME, "h1")
     DELETE_BUTTON = (By.ID, "delete")
+    CONFIRMED_BUTTON = (By.ID, "confirmedDelete")
 
     def add_title(self, title):
         self.wait_until_clickable(self.TITLE_FIELD).send_keys(title)
@@ -33,4 +34,8 @@ class PostModifyPage(BasePage):
 
     def click_delete_button(self):
         self.wait_until_clickable(self.DELETE_BUTTON).click()
+
+    def click_confirmed_button(self):
+        self.wait_until_clickable(self.CONFIRMED_BUTTON).click()
+
 
