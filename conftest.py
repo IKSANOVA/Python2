@@ -1,13 +1,15 @@
 import random
 
 import pytest
-from constants import Links, VALID_BROWSER
+
+from constants import Links, VALID_BROWSERS
 
 
 @pytest.fixture()
 def browser(request):
     launch = request.config.getoption("--launch")
-    browser = VALID_BROWSER[launch]()
+    browser = VALID_BROWSERS[launch]()
+    browser.maximize_window()
     yield browser
     browser.quit()
 
@@ -16,7 +18,7 @@ def browser(request):
 def url(request):
     """Фикстура для получения заданного из командной строки окружения"""
     env = request.config.getoption("--env")
-    url = Links.url.get(env)
+    url = Links.base_url.get(env)
     if not url:
         raise Exception("Передано неверное окружение")
     return url
@@ -36,7 +38,7 @@ def pytest_addoption(parser):
         "--env", default="prod"
     )
     parser.addoption(
-        "--launch", default="Chrome", choices=["chrome", "opera"]
+        "--launch", default="chrome", choices=["chrome", "opera"]
     )
 
 

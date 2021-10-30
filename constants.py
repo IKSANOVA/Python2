@@ -1,4 +1,4 @@
-from webbrowser import Chrome, Opera
+from selenium.webdriver import Opera, Chrome
 
 NEGATIVE_LOGIN_CREDENTIALS = [
     ("", "!QAZ2wsx"),
@@ -7,20 +7,20 @@ NEGATIVE_LOGIN_CREDENTIALS = [
     ("test@test.ru", "1QAZ2wsx")
 ]
 
+# здесь должны быть креденшелзы, присланные преподавателем
 POSITIVE_LOGIN_CREDENTIALS = {"email": "qa_test@test.ru",
                               "password": "!QAZ2wsx"}
 
 
 class Links:
-    url = {"prod": "https://qastand.valhalla.pw/",
-           "stage": "https://qastand-dev.valhalla.pw/"}
+    base_url = {"prod": "https://qastand.valhalla.pw/",
+                "stage": "https://qastand-dev.valhalla.pw/"}
     login = "login"
     profile = "profile"
     blog = "blog"
 
 
-VALID_BROWSER = {
-    "chrome": Chrome,
-    "opera": Opera
-
+VALID_BROWSERS = {
+   "chrome": Chrome,
+   "opera": Opera
 }

@@ -3,7 +3,6 @@ from typing import Dict, Union
 from http import HTTPStatus
 
 import requests
-import self as self
 
 from constants import POSITIVE_LOGIN_CREDENTIALS
 
@@ -34,7 +33,7 @@ class Client:
 
     def auth(self) -> Dict:
         """Метод для авторизации пользователя, создает сессию, в которой авторизуется,
-       возвращает авторизационные куки"""
+        возвращает авторизационные куки"""
         if not self._session:
             self._session = requests.session()
             self._session.post(self._login, data=POSITIVE_LOGIN_CREDENTIALS)
