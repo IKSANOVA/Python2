@@ -2,6 +2,7 @@ from typing import Tuple
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Chrome
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
@@ -9,6 +10,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 # класс с общими хэлперами и методами для работы с элементами, которые расположены на каждой странице
 class BasePage:
+    BUTTON_EXIT = (By.CSS_SELECTOR, "[href='/logout']")
+
     def __init__(self, browser: Chrome, url):
         self.browser = browser
         self.url = url
@@ -39,6 +42,9 @@ class BasePage:
     def wait_until_visible(self, locator: Tuple, timeout: int = 5):
         """Ждём, пока элемент не станет видимым"""
         return WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located(locator))
+
+    def click_button_exit(self):
+        self.wait_until_clickable(self.BUTTON_EXIT).click()
 
     def element_is_present(self, locator: Tuple, timeout: int = 5) -> bool:
         """Убеждаемся, что элемент присутствует на странице"""
