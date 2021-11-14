@@ -15,7 +15,6 @@ class TestAuthorization:
         self.main_page = MainPage(browser, url + Links.blog)
 
     def test_login_positive(self):
-
         self.auth_page.open_page()
         self.auth_page.add_email(POSITIVE_LOGIN_CREDENTIALS["email"])
         self.auth_page.add_password(POSITIVE_LOGIN_CREDENTIALS["password"])
@@ -36,7 +35,4 @@ class TestAuthorization:
         self.base_page.click_button_exit()
         self.main_page.open_page()
         self.main_page.check_button_new()
-
-
-
 
