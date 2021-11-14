@@ -21,7 +21,7 @@ class MainPage(BasePage):
             self.CREATE_POST_SUCCESS_MESSAGE).text, \
             "Не отобразилось сообщение об успехе"
 
-    def check_button_new(self):
+    def check_button_new_not_present(self):
         self.wait_until_not_present(self.CREATE_POST_BUTTON)
 
     def check_post_exists(self, title):

@@ -38,5 +38,5 @@ class TestAuthorization:
         self.base_page.open_page()
         self.base_page.click_button_exit()
         self.main_page.open_page()
-        self.main_page.check_button_new()
+        self.main_page.check_button_new_not_present()
 

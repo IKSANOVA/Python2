@@ -8,7 +8,6 @@ class PostModifyPage(BasePage):
     TITLE_FIELD = (By.ID, "title")
     TEXT_FIELD = (By.ID, "text")
     TAGS_FIELD = (By.ID, "tags")
-    SUBMIT_BUTTON = (By.ID, "submit")
     EDIT_BUTTON = (By.ID, "edit")
     TITLE = (By.TAG_NAME, "h1")
     DELETE_BUTTON = (By.ID, "delete")
@@ -22,9 +21,6 @@ class PostModifyPage(BasePage):
 
     def add_tags(self, tags):
         self.wait_until_clickable(self.TAGS_FIELD).send_keys(tags)
-
-    def click_submit_button(self):
-        self.wait_until_clickable(self.SUBMIT_BUTTON).click()
 
     def click_edit_button(self):
         self.wait_until_clickable(self.EDIT_BUTTON).click()
