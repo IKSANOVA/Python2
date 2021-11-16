@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from pages.auth_page import AuthPage
@@ -14,6 +15,7 @@ class TestAuthorization:
         self.base_page = BasePage(browser, url + Links.blog)
         self.main_page = MainPage(browser, url + Links.blog)
 
+    @allure.title("Проверка авторизации с корректными логином и паролем")
     def test_login_positive(self):
         self.auth_page.open_page()
         self.auth_page.add_email(POSITIVE_LOGIN_CREDENTIALS["email"])
@@ -23,16 +25,19 @@ class TestAuthorization:
     @pytest.mark.parametrize("email, password",
                              NEGATIVE_LOGIN_CREDENTIALS,
                              ids=["empty email", "empty password", "invalid email", "unregistered user"])
+    @allure.title("Проверка авторизации с некорректными логином и паролем")
     def test_login_negative(self, email, password):
         self.auth_page.open_page()
         self.auth_page.add_email(email)
         self.auth_page.add_password(password)
         self.auth_page.click_button_auth()
 
+    @allure.title("Проверка работы логаута")
     @pytest.mark.usefixtures("login")
     def test_logout(self):
         self.base_page.open_page()
         self.base_page.click_button_exit()
         self.main_page.open_page()
-        self.main_page.check_button_new()
+        self.main_page.check_button_new_not_present()
+
 
