@@ -40,3 +40,4 @@ class TestAuthorization:
         self.main_page.open_page()
         self.main_page.check_button_new_not_present()
 
+
