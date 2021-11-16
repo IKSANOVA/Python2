@@ -63,7 +63,7 @@ class TestsBlogModify:
 
     # тест редактирования поста
     def test_edit_post(self, create_post_for_test, faker):
-        title, _ = create_post_for_test
+        title, _ = create_post_for_test.gitignore
 
         self.blog_page.open_page()
         self.post_modify_page.click_title_button()
